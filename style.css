@@ -1,0 +1,154 @@
+/* Global color variables and button base (previously added) */
+:root {
+  --azure-bg: azure;
+  --azure-hover: #bfefff;
+  --button-text: #002b36;
+  --button-focus-ring: rgba(0, 120, 215, 0.28);
+}
+
+button,
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+.btn {
+  background-color: var(--azure-bg);
+  color: var(--button-text);
+  border: 1px solid rgba(0,0,0,0.08);
+  padding: 0.45rem 0.9rem;
+  font-family: inherit;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 120ms ease, transform 120ms ease, box-shadow 120ms ease;
+}
+
+button:hover,
+input[type="button"]:hover,
+input[type="submit"]:hover,
+input[type="reset"]:hover,
+.btn:hover {
+  background-color: var(--azure-hover);
+  transform: translateY(-1px);
+}
+
+button:focus,
+input[type="button"]:focus,
+input[type="submit"]:focus,
+input[type="reset"]:focus,
+.btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px var(--button-focus-ring);
+}
+
+/* Basic page layout */
+html, body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  background-image: url('bricked up.JPG');
+  background-size: cover;
+  height: 100vh;
+  width: 100vw;
+  font-family: 'ABeeZee', sans-serif;
+}
+
+/* Top bar */
+.topbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  backdrop-filter: blur(10px);
+  background-color: rgba(0, 0, 0, 0.125);
+  color: #fff;
+  justify-content: space-between;
+  gap: 32px;
+  align-items: center;
+  padding: 8px 12px;
+  box-sizing: border-box;
+}
+
+#welcomeopen {
+  cursor: pointer;
+  margin-left: 16px;
+  font-weight: 700;
+  background-color: rgba(256,256,256,0.125);
+  padding: 4px 12px;
+  border-radius: 16px;
+}
+
+#timebox {
+  margin-right: 16px;
+  background-color: rgba(256,256,256,0.125);
+  padding: 4px 12px;
+  border-radius: 16px;
+}
+
+/* Welcome window (frosted) */
+#welcome {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid rgba(255,255,255,0.18);
+  width: fit-content;
+  padding: 64px 32px 32px 32px;
+  background-color: rgba(255,255,255,0.12);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+  color: #000;
+  border-radius: 30px;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+#welcomeheader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  cursor: move;
+  justify-content: center;
+  margin: 0;
+  padding: 10px 16px;
+  background-color: rgba(255,255,255,0.18);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  box-sizing: border-box;
+}
+
+#window-controls {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  gap: 8px;
+}
+
+#window-controls button {
+  width: 14px;
+  height: 14px;
+  padding: 0;
+  border-radius: 50%;
+  border: none;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.15);
+  cursor: pointer;
+}
+#window-controls button[aria-label="Close"] { background: #ff5f57; }
+#window-controls button[aria-label="Minimize"] { background: #ffbd2e; }
+#window-controls button[aria-label="Maximize"] { background: #28c840; }
+
+.hero-text { text-align: center; }
+
+.profile-pic { width: 200px; height: 200px; margin: auto; display: block; }
+
+/* Small utilities */
+.hidden { display: none !important; }

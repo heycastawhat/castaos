@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>My Site</title>
+    <title>CastaOS</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/x-icon" href="Favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,42 +11,42 @@
     <script defer src="https://cloud.umami.is/script.js" data-website-id="9942e529-74fa-4df8-9eb2-d4d670aa1d1e"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<body style="background-image: url('bricked\ up.JPG'); background-size: cover; height: 100vh; width: 100vw; font-family: 'ABeeZee', sans-serif;"> 
+<body> 
 <main>
 
-  <div
-    style="position: absolute; width: 100%; display: flex; backdrop-filter: blur(10px); background-color: rgba(0, 0, 0, 0.125); color: #fff; justify-content: space-between; gap: 32px;">
-        <p
-          style="margin-left: 16px; font-weight: 700; background-color: rgba(256, 256, 256, 0.125); padding: 4px 12px; border-radius: 16px;">
+  <div class="topbar">
+        <p id="welcomeopen" role="button" tabindex="0" onclick="document.getElementById('welcome').style.display='block'">
             CastaOS
         </p>
 
-        <p
-          style="margin-right: 16px; background-color: rgba(256, 256, 256, 0.125); padding: 4px 12px; border-radius: 16px;">
+        <p id="timebox">
           <span id="timeElement"></span>
         </p>
   </div>
-  <div id="welcome" style="position: absolute; top: 50%; left: 50%; 
-transform: translate(-50%, -50%); border: solid; width: fit-content; padding: 32px; background-color: azure; border-radius: 30px;">
-   <p id="welcomeheader"> 
-		Handle
-	</p>
+  <div id="welcome">
+  <div id="welcomeheader">
+  <div id="window-controls">
+    <!-- macOS-style control buttons -->
+    <button aria-label="Close" title="Close" onclick="event.stopPropagation(); closeWindow(document.getElementById('welcome'))"></button>
+  </div>
+  <p style="margin: 0px; color: black; font-weight: 500">Welcome</p>
+    </div>
+
    <section class="hero">
   <div class="hero-box hero-colored">
     <div class="hero-content">
-      <div class="hero-text" style="text-align: center;">
+  <div class="hero-text">
         <h1>Hello!</h1>
         <p>
-          You've stumbled upon my site!<br>
+          You've stumbled upon my os!<br>
           Here you will find most of my projects and sometimes cool stuff!<br>
           I like a lot of tech, photography, 3D Printing, Taskmaster and making stuff.<br>
           Like all personal websites, this is never finished and will constantly change!<br>
           Feel free to explore and see what I have made!<br>
-          You should sign the guestbook!
         </p>
       </div>
       <div class="hero-image">
-        <img style="width:  200px; height: 200px; margin: auto; display: block;" src="https://github.com/Castawhat/micheal.site-backend/blob/main/PFP-removebg-preview.png?raw=true" alt="The Fox" class="profile-pic">
+        <img src="https://github.com/Castawhat/micheal.site-backend/blob/main/PFP-removebg-preview.png?raw=true" alt="The Fox" class="profile-pic">
       </div>
     </div>
   </div>
