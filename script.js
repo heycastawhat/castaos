@@ -1,6 +1,8 @@
 // Make the DIV element draggable:
 // Target the `#welcome` container so its header (`#welcomeheader`) can be used to drag it.
-dragElement(document.getElementById("welcome"));
+// Initialize dragging for elements only if they exist in the DOM.
+var _welcomeEl = document.getElementById("welcome");
+if (_welcomeEl) dragElement(_welcomeEl);
 
 // Step 1: Define a function called `dragElement` that makes an HTML element draggable.
 function dragElement(element) {
@@ -90,15 +92,199 @@ function dragElement(element) {
 
 
 
-var welcomeScreen = document.querySelector("#welcome")
+var welcomeScreen = document.querySelector("#welcome");
 
 function closeWindow(element) {
-  element.style.display = "none"
+  if (!element) return;
+  element.style.display = "none";
 }
 
-var selectedIcon = selected
-
+// Simple icon selection helpers (guarded and non-throwing)
+var selectedIcon = null;
 function selectIcon(element) {
+  if (!element) return;
+  if (selectedIcon && selectedIcon !== element) deselectIcon(selectedIcon);
   element.classList.add("selected");
-  selectedIcon = element
-} 
+  selectedIcon = element;
+}
+
+function deselectIcon(element) {
+  if (!element) return;
+  element.classList.remove("selected");
+  if (selectedIcon === element) selectedIcon = null;
+}
+
+function handleIconTap(element) {
+  if (!element) return;
+  if (element.classList.contains("selected")) {
+    deselectIcon(element);
+  } else {
+    selectIcon(element);
+  }
+}
+
+// Initialize dragging for optional notes element if present
+var _notesEl = document.querySelector("#notes");
+if (_notesEl) dragElement(_notesEl);
+
+// Hide notes by default on load
+if (_notesEl) {
+  _notesEl.style.display = 'none';
+}
+
+// Initialize and hide stats window by default
+var _statsEl = document.querySelector('#stats');
+if (_statsEl) {
+  dragElement(_statsEl);
+  _statsEl.style.display = 'none';
+}
+
+var biggestIndex = 1;
+
+function addWindowTapHandling(element) {
+  element.addEventListener("mousedown", () =>
+    handleWindowTap(element)
+  )
+}
+function handleWindowTap(element) {
+  biggestIndex++;  // Increment biggestIndex by 1
+  element.style.zIndex = biggestIndex;
+}
+function openWindow(element) {
+  if (!element) return;
+  element.style.display = 'block';
+  biggestIndex++;  // Increment biggestIndex by 1
+  element.style.zIndex = biggestIndex;
+}
+
+var topBar = document.querySelector("#topbar")
+
+function openWindow(element) {
+  element.style.display = "flex";
+  biggestIndex++;  // Increment biggestIndex by 1
+  element.style.zIndex = biggestIndex;
+  topBar.style.zIndex = biggestIndex + 1;
+}
+
+function handleWindowTap(element) {
+  biggestIndex++;  // Increment biggestIndex by 1
+  element.style.zIndex = biggestIndex;
+  topBar.style.zIndex = biggestIndex + 1;
+  deselectIcon(selectedIcon)
+}
+
+/**
+ * Attach close button behavior to a window element by id.
+ * Looks for a close control inside the window and wires it to hide the window.
+ */
+function makeClosable(elementName) {
+  if (!elementName) return;
+  var screen = document.getElementById(elementName);
+  if (!screen) return;
+  // find a close control inside the window (button with aria-label="Close")
+  var closeBtn = screen.querySelector('#window-controls button[aria-label="Close"]');
+  if (!closeBtn) return;
+  // ensure clicking the close button doesn't start a drag
+  closeBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    closeWindow(screen);
+  });
+  // keyboard support
+  closeBtn.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      e.stopPropagation();
+      closeWindow(screen);
+    }
+  });
+}
+
+/**
+ * Initialize a named window: add tap handling, make closable and enable dragging.
+ */
+function initializeWindow(elementName) {
+  if (!elementName) return;
+  var screen = document.querySelector('#' + elementName);
+  if (!screen) return;
+  // Add z-index bringing behavior
+  addWindowTapHandling(screen);
+  // Wire close button
+  makeClosable(elementName);
+  // Enable dragging
+  dragElement(screen);
+}
+
+// initialize known windows
+initializeWindow('welcome');
+initializeWindow('notes');
+initializeWindow('stats');
+
+// Initialize and hide photo window by default (same behavior as notes/stats)
+var _photoEl = document.querySelector('#photo');
+if (_photoEl) {
+  initializeWindow('photo');
+  _photoEl.style.display = 'none';
+}
+
+// Wire the desktop notes icon to open the notes window (click and keyboard)
+var notesIcon = document.getElementById('notesIcon');
+if (notesIcon) {
+  notesIcon.addEventListener('click', function(e) {
+    var notes = document.getElementById('notes');
+    if (!notes) return;
+    openWindow(notes);
+  });
+  notesIcon.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      var notes = document.getElementById('notes');
+      if (!notes) return;
+      openWindow(notes);
+    }
+  });
+}
+
+// Wire the stats icon
+var statsIcon = document.getElementById('statsIcon');
+if (statsIcon) {
+  statsIcon.addEventListener('click', function(e) {
+    var stats = document.getElementById('stats');
+    if (!stats) return;
+    openWindow(stats);
+  });
+  statsIcon.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      var stats = document.getElementById('stats');
+      if (!stats) return;
+      openWindow(stats);
+    }
+  });
+}
+
+// Wire the photo icon (click + keyboard) to open the photo window
+var photoIcon = document.getElementById('photoIcon');
+if (photoIcon) {
+  photoIcon.addEventListener('click', function(e) {
+    var photo = document.getElementById('photo');
+    if (!photo) return;
+    openWindow(photo);
+  });
+  photoIcon.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      var photo = document.getElementById('photo');
+      if (!photo) return;
+      openWindow(photo);
+    }
+  });
+}
+
+function handleIconTap(element) {
+  if (element.classList.contains("selected")) {
+    deselectIcon(element)
+    openWindow(window)
+  } else {
+    selectIcon(element)
+  }
+}

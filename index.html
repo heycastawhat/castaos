@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=ABeeZee:ital@0;1&display=swap" rel="stylesheet">
     <script defer src="https://cloud.umami.is/script.js" data-website-id="9942e529-74fa-4df8-9eb2-d4d670aa1d1e"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 </head>
 <body> 
 <main>
@@ -23,12 +24,66 @@
           <span id="timeElement"></span>
         </p>
   </div>
-  <div id="desktopApps" style="padding-top: 64px;">
-    <div style="text-align: center; padding: 16px; filter: drop-shadow(0 0 8px black); width: fit-content">
-      <img src="./notes.png" style="width: 64px; height: 64px; border-radius: 16px;">
-      <p style="margin: 0px; color: #fff; ">Notes</p>
+  <div class="selected" styles="(styles)">
+    <div id="desktopApps" style="padding-top: 64px; display:flex; gap:12px;">
+      <div id="notesIcon" role="button" tabindex="0" aria-label="Open Notes" style="display:inline-block; text-align: center; padding: 16px; filter: drop-shadow(0 0 8px black); width: fit-content">
+        <img src="./notes.png" style="width: 64px; height: 64px; border-radius: 16px;">
+        <p style="margin: 0px; color: #fff; ">Notes</p>
+      </div>
+      <div id="statsIcon" role="button" tabindex="0" aria-label="Open Stats" style="display:inline-block; text-align: center; padding: 16px; filter: drop-shadow(0 0 8px black); width: fit-content">
+        <img src="./ststs.png" style="width: 64px; height: 64px; border-radius: 16px;"> <!-- IGNORE, STSTS NOT STATS -->
+        <p style="margin: 0px; color: #fff; ">Stats</p>
+      </div>
+      <div id="photoIcon" role="button" tabindex="0" aria-label="Open Photo" style="display:inline-block; text-align: center; padding: 16px; filter: drop-shadow(0 0 8px black); width: fit-content">
+        <img src="./photo.jpg" style="width: 64px; height: 64px; border-radius: 16px;">
+        <p style="margin: 0px; color: #fff; ">Photo</p>
+      </div>
     </div>
   </div>
+
+  <!-- Notes window -->
+  <div id="notes">
+    <div id="notesheader">
+      <div id="window-controls">
+        <!-- macOS-style control buttons -->
+        <button aria-label="Close" title="Close" onclick="event.stopPropagation(); closeWindow(document.getElementById('notes'))"></button>
+      </div>
+      <p style="margin: 0px; color: black; font-weight: 500">Notes</p>
+    </div>
+    <iframe src="https://blog.slitrostudio.me"></iframe>
+  </div>
+
+  <!-- Stats window -->
+  <div id="stats" class="compact">
+    <div id="statsheader">
+      <div id="window-controls">
+        <button aria-label="Close" title="Close" onclick="event.stopPropagation(); closeWindow(document.getElementById('stats'))"></button>
+      </div>
+      <p style="margin: 0px; color: black; font-weight: 500">Stats</p>
+    </div>
+    <section class="tracker-section">
+      <div class="tracker-box">
+        <h1>Fun Lil' Stats</h1>
+        <p id="time"></p>
+        <p id="lastfm"></p>
+      </div>
+    </section>
+  </div>
+
+  <div id="photo" class="compact">
+    <div id="photoheader">
+      <div id="window-controls">
+        <button aria-label="Close" title="Close" onclick="event.stopPropagation(); closeWindow(document.getElementById('photo'))"></button>
+      </div>
+      <p style="margin: 0px; color: black; font-weight: 500">Photo</p>
+    </div>
+    <section class="photo-section">
+      <div class="photo-box">
+
+      </div>
+    </section>
+  </div>
+
   <div id="welcome">
   <div id="welcomeheader">
   <div id="window-controls">
@@ -60,6 +115,7 @@
 </div>
 </main>
  <script src="script.js"></script>
+  <script src="tracking.js"></script>
 </body>
 
 </html>

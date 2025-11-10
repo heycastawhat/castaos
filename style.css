@@ -1,9 +1,16 @@
 /* Global color variables and button base (previously added) */
+@import url('https://fonts.googleapis.com/css2?family=ABeeZee:ital@0;1&display=swap');
 :root {
   --azure-bg: azure;
   --azure-hover: #bfefff;
   --button-text: #002b36;
   --button-focus-ring: rgba(0, 120, 215, 0.28);
+}
+
+/* Use ABeeZee everywhere by default so headings, lists, buttons, etc. inherit it */
+html, body, button, input, textarea, select, a, p, div, span,
+h1, h2, h3, h4, h5, h6, .item {
+  font-family: 'ABeeZee', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
 
 button,
@@ -50,7 +57,7 @@ body {
   background-size: cover;
   height: 100vh;
   width: 100vw;
-  font-family: 'ABeeZee', sans-serif;
+  font-family: 'ABeeZee', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
 
 /* Top bar */
@@ -86,15 +93,16 @@ body {
   border-radius: 16px;
 }
 
-/* Welcome window (frosted) */
-#welcome {
+/* Window (frosted) - applied to welcome and notes */
+#welcome, #notes, #stats, #photo {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   border: 1px solid rgba(255,255,255,0.18);
-  width: fit-content;
-  padding: 64px 32px 32px 32px;
+  /* default width that fits smaller screens but expands on larger viewports */
+  width: min(92vw, 760px);
+  padding: 48px 28px 28px 28px;
   background-color: rgba(255,255,255,0.12);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
@@ -103,9 +111,12 @@ body {
   border-radius: 30px;
   overflow: hidden;
   box-sizing: border-box;
-}
+  border-image-width: 250px;
+  border-image-height: 250px;
 
-#welcomeheader {
+}
+ 
+#welcomeheader, #notesheader, #statsheader, #photoheader {
   position: absolute;
   top: 0;
   left: 0;
@@ -152,3 +163,172 @@ body {
 
 /* Small utilities */
 .hidden { display: none !important; }
+
+/* Notes app specific layout (two-column list + content) */
+#notes .notes-wrap {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+#notes .notes-list {
+  width: 160px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 12px;
+  padding: 12px;
+  box-sizing: border-box;
+}
+
+#notes .notes-list .item {
+  padding: 12px;
+  margin-bottom: 12px;
+  background: rgba(255,255,255,0.03);
+  border-radius: 10px;
+  /* inherit the global ABeeZee font */
+  font-family: inherit;
+}
+
+#notes .notes-content {
+  flex: 1;
+  max-width: 640px;
+}
+
+/* On very wide screens, give the notes window more breathing room */
+@media (min-width: 1200px) {
+  #notes {
+    width: min(80vw, 1100px);
+    padding: 64px 48px 48px 48px;
+  }
+  #notes .notes-list { width: 200px; }
+  #notes .notes-content { max-width: 800px; }
+}
+
+#notes .note-card {
+  background: rgba(255,255,255,0.9);
+  color: #000;
+  padding: 18px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  font-family: 'ABeeZee', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* Stats tracker card inside the stats window should match the frosted card look.
+   Make it translucent and cap the height so it doesn't grow excessively. */
+#stats .tracker-box {
+  /* frosted translucent card to match other window chrome */
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,0.14);
+  color: #000;
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  font-family: inherit;
+  width: min(92%, 720px);
+  max-width: 720px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  max-height: 40vh; /* keep it shorter */
+  overflow-y: auto; /* scroll if content is long */
+}
+
+/* Stats header and layout fixes to match the chrome used for other windows */
+#statsheader p {
+  margin: 0;
+  color: black;
+  font-weight: 600;
+  text-align: center;
+}
+
+#stats .tracker-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 8px;
+}
+
+#stats .tracker-box h1 {
+  margin: 0 0 8px 0;
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+@media (min-width: 1200px) {
+  #stats { width: min(80vw, 1100px); }
+  #stats .tracker-box { padding: 28px; }
+}
+
+/* COMPACT STATS OVERRIDE: make the stats window much smaller and centered */
+#stats.compact {
+  width: 480px !important;
+  max-width: 90vw;
+  max-height: 50vh !important;
+  /* leave room for the absolute header */
+  padding: 64px 18px 18px 18px !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+#stats.compact .tracker-box {
+  width: 420px !important;
+  max-width: 88%;
+  max-height: 40vh;
+  padding: 12px !important;
+  margin-top: 6px; /* small gap below header */
+}
+
+#notes .note-card h2 {
+  margin-top: 0;
+  /* headings use the global ABeeZee as well */
+  font-family: inherit;
+}
+
+#notes .note-meta {
+  font-size: 12px;
+  color: #444;
+  margin-bottom: 12px;
+  font-family: inherit;
+}
+
+#notes .note-body {
+  line-height: 1.5;
+}
+
+/* If there's an iframe inside #notes, make it fit the notes area and match the rounded card look.
+   Note: you cannot change fonts inside a cross-origin iframe from the parent page; the iframe's
+   content must include the font itself. These styles only affect the iframe element (frame box).
+*/
+#notes iframe {
+  width: 100%;
+  height: 60vh;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  display: block;
+  background: rgba(255,255,255,0.98);
+}
+
+@media (min-width: 1200px) {
+  #notes iframe { height: 70vh; }
+}
+#welcome img,
+#notes img,
+#stats img,
+#photo img {
+  width: 250px;
+  height: 250px;
+  max-width: 100%;
+  object-fit: cover; /* crop while preserving aspect */
+  display: block;
+  border-radius: 6px;
+}
+
+/* Photo window specific layout */
+#photo .photo-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 12px;
+}
