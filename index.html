@@ -38,6 +38,14 @@
         <img src="./photo.jpg" style="width: 64px; height: 64px; border-radius: 16px;">
         <p style="margin: 0px; color: #fff; ">Photo Gallery</p>
       </div>
+      <div id="Contact" role="button" tabindex="0" aria-label="Contact" style="display:inline-block; text-align: center; padding: 16px; filter: drop-shadow(0 0 8px black); width: fit-content">
+        <img src="./Contact.png" style="width: 64px; height: 64px; border-radius: 16px;">
+        <p style="margin: 0px; color: #fff; ">Contact Me!</p>
+      </div>
+      <div id="About" role="button" tabindex="0" aria-label="Button 2" style="display:inline-block; text-align: center; padding: 16px; filter: drop-shadow(0 0 8px black); width: fit-content">
+        <img src="./huh.png" style="width: 64px; height: 64px; border-radius: 16px;">
+        <p style="margin: 0px; color: #fff; ">About me</p>
+      </div>
     </div>
   </div>
 
@@ -66,6 +74,43 @@
         <p id="lastfm"></p>
       </div>
     </section>
+  </div>
+
+    <div id="contact" class="compact">
+    <div id="contactheader">
+      <div id="window-controls">
+        <button aria-label="Close" title="Close" onclick="event.stopPropagation(); closeWindow(document.getElementById('contact'))"></button>
+      </div>
+      <p style="margin: 0px; color: black; font-weight: 500">Contact Me!</p>
+    </div>
+  <p> I'm contactable by email at hey (at) slitrostudio (dot) me</p>
+  <p>NO EMAIL LIST</p>
+  <pre>
+If you are or represent any of the following:
+- Ai Companies
+- Marketers
+- Spammers
+- Door to door salesmen
+- Unsolicited advice givers
+Please do not contact me ever, thank you.
+  </pre>
+    </section>
+  </div>
+
+<div id="About" class="compact">
+    <div id="aboutheader">
+      <div id="window-controls">
+        <button aria-label="Close" title="Close" onclick="event.stopPropagation(); closeWindow(document.getElementById('contact'))"></button>
+      </div>
+      <p style="margin: 0px; color: black; font-weight: 500">About Me!</p>
+    </div>
+<p>Who am I anyway?</p>
+<p> Hey, I'm Josh! (also seen as Castawhat or micheal.wave some places online).
+<br>I am a Kiwi (New Zealander), a bad developer, and an amateur photographer.
+<br>I like tech, photography, gaming, and making stuff.
+<br>This website is a personal project of mine originally made to knock out both the Hack Club webOS jam, and the Personal Website YSWS
+<br> I hope you enjoy poking around my little corner of the web! 
+</p>
   </div>
 
   <div id="photo" class="compact">
@@ -116,8 +161,9 @@
           I like a lot of tech, photography, Taskmaster, Game Changer, twenty øne pilots and making stuff.<br>
           Like all personal websites, this is never finished and will constantly change when I feel like it.<br>
           Feel free to poke around!<br>
+          <br>
         </p>
-        <p id="clickMe" onclick="showRandomQuote()">
+        <p id="clickMe" onclick="showRandomQuote()" style="color: blue;">
     Click me
   </p>
       </div>

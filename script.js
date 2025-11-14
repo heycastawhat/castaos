@@ -280,6 +280,56 @@ if (photoIcon) {
   });
 }
 
+// Initialize and hide contact window by default
+var _contactEl = document.querySelector('#contact');
+if (_contactEl) {
+  initializeWindow('contact');
+  _contactEl.style.display = 'none';
+}
+
+// Wire the contact icon (click + keyboard) to open the contact window
+var contactIcon = document.getElementById('Contact');
+if (contactIcon) {
+  contactIcon.addEventListener('click', function(e) {
+    var contact = document.getElementById('contact');
+    if (!contact) return;
+    openWindow(contact);
+  });
+  contactIcon.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      var contact = document.getElementById('contact');
+      if (!contact) return;
+      openWindow(contact);
+    }
+  });
+}
+
+// Initialize and hide about window by default
+var _aboutEl = document.querySelector('#About');
+if (_aboutEl) {
+  initializeWindow('About');
+  _aboutEl.style.display = 'none';
+}
+
+// Wire the about icon (click + keyboard) to open the about window
+var aboutIcon = document.getElementById('About');
+if (aboutIcon) {
+  aboutIcon.addEventListener('click', function(e) {
+    var about = document.getElementById('About');
+    if (!about) return;
+    openWindow(about);
+  });
+  aboutIcon.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      var about = document.getElementById('About');
+      if (!about) return;
+      openWindow(about);
+    }
+  });
+}
+
 function handleIconTap(element) {
   if (element.classList.contains("selected")) {
     deselectIcon(element)

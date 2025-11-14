@@ -94,7 +94,7 @@ body {
 }
 
 /* Window (frosted) - applied to welcome and notes */
-#welcome, #notes, #stats, #photo {
+#welcome, #notes, #stats, #photo, #contact, #About {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -116,7 +116,7 @@ body {
 
 }
  
-#welcomeheader, #notesheader, #statsheader, #photoheader {
+#welcomeheader, #notesheader, #statsheader, #photoheader, #contactheader, #aboutheader {
   position: absolute;
   top: 0;
   left: 0;
