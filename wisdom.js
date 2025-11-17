@@ -57,6 +57,13 @@ const quotes = [
 "C++ is horrible",
 "HTML is horrible",
 "CSS is horrible",
+"You must be insane to use Internet Explorer",
+"my code works on my machine",
+"Also check out codingcorner.dev!",
+"i dont like neovim",
+"i dont like vim",
+"i dont like emacs",
+"i only use VSCode",
 ];
 
 function showRandomQuote() {
