@@ -167,7 +167,7 @@ body {
    - enable modern balanced wrapping + hyphenation for nicer overflow
    - use a softer dark-gray instead of pure black for less contrast */
 #welcome .hero-text p {
-  color: #333333; /* dark gray instead of pure black */
+  color: #000000; /* reset to pure black */
   line-height: 1.6;
   margin-bottom: 0.9rem;
   max-width: 60ch; /* limits measure for better readability */
@@ -184,7 +184,7 @@ body {
 
 #welcome .hero-text h1 {
   margin-bottom: 0.4rem;
-  color: #111111;
+  color: #000000;
 }
 
 /* Apply the welcome typography improvements across all main windows */
@@ -194,7 +194,7 @@ body {
 #contact p,
 #About p,
 #photo p {
-  color: #333333; /* softer dark gray */
+  color: #000000; /* reset to pure black */
   line-height: 1.6;
   margin-bottom: 0.9rem;
   max-width: 60ch;
@@ -216,7 +216,7 @@ body {
 #About h1,
 #contact h1 {
   margin-bottom: 0.4rem;
-  color: #111111;
+  color: #000000;
   line-height: 1.25;
 }
 
@@ -227,7 +227,7 @@ body {
   white-space: pre-wrap;
   word-break: break-word;
   hyphens: auto;
-  color: #333333;
+  color: #000000;
   background: rgba(255,255,255,0.03);
   padding: 8px 10px;
   border-radius: 8px;
