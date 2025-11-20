@@ -350,12 +350,11 @@ body {
   max-width: 88%;
   max-height: 40vh;
   padding: 12px !important;
-  margin-top: 6px; /* small gap below header */
+  margin-top: 6px; 
 }
 
 #notes .note-card h2 {
   margin-top: 0;
-  /* headings use the global ABeeZee as well */
   font-family: inherit;
 }
 
@@ -370,10 +369,6 @@ body {
   line-height: 1.5;
 }
 
-/* If there's an iframe inside #notes, make it fit the notes area and match the rounded card look.
-   Note: you cannot change fonts inside a cross-origin iframe from the parent page; the iframe's
-   content must include the font itself. These styles only affect the iframe element (frame box).
-*/
 #notes iframe {
   width: 100%;
   height: 60vh;
@@ -398,6 +393,31 @@ body {
   display: block;
   border-radius: 6px;
 }
+
+/* Boot overlay styles */
+.boot-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+  z-index: 99999;
+  transition: opacity 360ms ease, transform 360ms ease;
+}
+.boot-overlay--hide { opacity: 0; transform: scale(0.995); pointer-events: none; }
+.boot-inner { text-align: center; color: #ffffff; padding: 18px; }
+.boot-logo { width: 160px; height: 160px; object-fit: contain; display: block; margin: 0 auto 18px auto; filter: drop-shadow(0 8px 24px rgba(0,0,0,0.6)); border-radius: 24px; }
+.boot-message { font-size: 1.125rem; color: #e8f6ff; margin: 0; opacity: 0.95; letter-spacing: 0.2px; }
+
+@media (max-width: 520px) {
+  .boot-logo { width: 120px; height: 120px; }
+  .boot-message { font-size: 1rem; }
+}
+
+/* each typed line inside the boot message stacks vertically */
+.boot-message .boot-line { display: block; margin-top: 8px; }
+.boot-message .boot-line:first-child { margin-top: 0; }
 
 /* Photo images: preserve natural aspect (actual shape) and stack vertically in a scrollable list */
 #photo .photo-list {

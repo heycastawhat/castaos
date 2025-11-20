@@ -13,6 +13,13 @@
 
 </head>
 <body> 
+  <!-- Boot overlay: shows logo + a random boot message on first load -->
+  <div id="boot-overlay" class="boot-overlay" aria-hidden="false">
+    <div class="boot-inner" role="dialog" aria-label="Boot screen">
+      <img class="boot-logo" src="SLITRO FINAL.png" alt="CastaOS logo">
+      <p id="boot-message" class="boot-message">Starting...</p>
+    </div>
+  </div>
 <main>
 
   <div class="topbar">
@@ -175,6 +182,7 @@ Please do not contact me ever, thank you.
 </section>
 </div>
 </main>
+ <script src="boot.js"></script>
  <script src="script.js"></script>
   <script src="tracking.js"></script>
   <script src="wisdom.js"></script>
