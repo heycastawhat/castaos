@@ -28,6 +28,16 @@
     "Finding Waldo...",
     "Hacking the mainframe...",
     "Clearing the foxboy allegations...",
+    "Welcome to trench",
+    "Boi dup bo dup dop",
+    "Kyle.",
+    "No one thinks what i think.",
+    "Just a moment...",
+    "Summoning Adam",
+    "More Milo Needed...",
+    "Im a kitchen sink",
+    "Installing castaOS twice...",
+    "Booting into unsafe mode...",
   ];
 
   function pickRandom() {
