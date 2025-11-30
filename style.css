@@ -394,6 +394,37 @@ body {
   border-radius: 6px;
 }
 
+/* Buttons (88x31) used in the welcome .button-grid — force exact size and preserve aspect */
+#welcome .button-grid img,
+.button-grid img {
+  width: 88px !important;
+  height: 31px !important;
+  max-width: none; /* ensure CSS width is used */
+  object-fit: contain; /* avoid cropping these small badge images */
+  display: inline-block;
+  border-radius: 0; /* keep original pixel look */
+}
+
+/* Make the welcome window a bit smaller and responsive */
+#welcome {
+  width: min(76vw, 640px);
+  padding: 36px 22px 22px 22px; /* slightly tighter padding */
+  max-height: 80vh; /* keep it from filling the entire viewport */
+  overflow-y: auto; /* allow scrolling if content is long */
+}
+
+/* Layout tweaks for the welcome hero content so it stacks on small screens */
+#welcome .hero-content {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+}
+@media (max-width: 720px) {
+  #welcome { width: min(92vw, 520px); padding: 20px; }
+  #welcome .hero-content { flex-direction: column; }
+  .profile-pic { width: 140px; height: 140px; }
+}
+
 /* Boot overlay styles */
 .boot-overlay {
   position: fixed;

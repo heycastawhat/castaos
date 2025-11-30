@@ -338,3 +338,56 @@ function handleIconTap(element) {
     selectIcon(element)
   }
 }
+
+// Copy 88x31 button HTML to clipboard when user clicks the paragraph with id `copyButton`.
+(function() {
+  var copyEl = document.getElementById('copyButton');
+  if (!copyEl) return;
+
+  var snippet = '<a href="https://os.slitrostudio.me">\n    <img src="https://site.slitrostudio.me/Slitro2.png" width="88" height="31" alt="Slitro Studio">\n  </a>';
+
+  function showCopiedFeedback(el) {
+    var prev = el.textContent;
+    el.textContent = 'Copied!';
+    setTimeout(function() { el.textContent = prev; }, 1400);
+  }
+
+  function fallbackCopy(text, el) {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    // keep off-screen
+    ta.style.position = 'fixed';
+    ta.style.left = '-9999px';
+    document.body.appendChild(ta);
+    ta.select();
+    try {
+      document.execCommand('copy');
+      showCopiedFeedback(el);
+    } catch (e) {
+      console.error('Fallback: Copy failed', e);
+      alert('Copy failed — please select and copy manually.');
+    }
+    document.body.removeChild(ta);
+  }
+
+  function copySnippet(el) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(snippet).then(function() {
+        showCopiedFeedback(el);
+      }).catch(function(err) {
+        console.error('navigator.clipboard failed', err);
+        fallbackCopy(snippet, el);
+      });
+    } else {
+      fallbackCopy(snippet, el);
+    }
+  }
+
+  copyEl.addEventListener('click', function() { copySnippet(copyEl); });
+  copyEl.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      copySnippet(copyEl);
+    }
+  });
+})();
