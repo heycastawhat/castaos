@@ -218,6 +218,39 @@ body {
   background-color: rgba(52, 152, 219, 0.5) !important;
 }
 
+/* Window-specific color tints (matching header colors) */
+#welcome {
+  /* No color tint - keep clear */
+}
+
+#notes {
+  background-color: rgba(74, 144, 226, 0.06) !important;
+}
+
+#stats {
+  background-color: rgba(155, 89, 182, 0.06) !important;
+}
+
+#photo {
+  background-color: rgba(26, 188, 156, 0.06) !important;
+}
+
+#contact {
+  background-color: rgba(230, 126, 34, 0.06) !important;
+}
+
+#About {
+  background-color: rgba(233, 30, 99, 0.06) !important;
+}
+
+#badges {
+  background-color: rgba(241, 196, 15, 0.06) !important;
+}
+
+#music {
+  background-color: rgba(52, 152, 219, 0.06) !important;
+}
+
 /* Music window specific sizing and content layout */
 #music {
   width: min(88vw, 700px) !important;
