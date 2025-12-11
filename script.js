@@ -123,7 +123,6 @@ var welcomeScreen = document.querySelector("#welcome");
 function closeWindow(element) {
   if (!element) return;
   
-  // If in wobbly mode, apply close animation
   if (wobbleMode) {
     // Remove wobble class so close animation takes over
     element.classList.remove('wobble');
@@ -135,9 +134,11 @@ function closeWindow(element) {
       element.classList.add('wobble-closing');
     }
     
-    // Wait for animation to complete before hiding
+    // Hide immediately, let animation play in background
+    element.style.display = "none";
+    
+    // Clean up classes after animation
     setTimeout(function() {
-      element.style.display = "none";
       element.classList.remove('wobble-closing', 'ccw');
     }, 600);
   } else {
