@@ -154,7 +154,7 @@
         <div class="art">🗺️</div>
         <div class="meta">
           <h4>Drag Path</h4>
-          <div class="sub">twenty one pilots · 4</div>
+          <div class="sub">twenty one pilots · 5:04</div>
         </div>
         <div class="controls">
           <audio controls>
@@ -168,15 +168,30 @@
 
   <div id="stats" class="compact">
     <div id="statsheader">
-      <div id="window-controls">
-        <button aria-label="Close" title="Close" onclick="event.stopPropagation(); closeWindow(document.getElementById('stats'))"></button>
-      </div>
-      <p style="margin: 0px; color: black; font-weight: 500">Stats</p>
+
+      <p style="margin: 0px; color: black; font-weight: 500">The Stats iPad</p>
     </div>
-        <h1>Fun Lil' Stats</h1>
-        <p id="time"></p>
-        <p id="lastfm"></p>
+
+    <div class="ipad-mock">
+      <div class="ipad-bezel">
+        <div class="ipad-camera"></div>
+        <div class="ipad-notch"></div>
+        <div class="ipad-screen">
+          <div class="stats-anim">
+            <div class="stat-card">
+              <div class="stat-label">Time in NZ</div>
+              <div class="stat-value" id="time">--:--</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Now Playing</div>
+              <div class="stat-value" id="lastfm">Not playing</div>
+            </div>
+          </div>
+        </div>
       </div>
+      <button class="ipad-home" aria-label="Home button" title="Close stats" onclick="event.stopPropagation(); closeWindow(document.getElementById('stats'))"></button>
+    </div>
+
   </div>
 
     <div id="contact" class="compact">
@@ -186,17 +201,30 @@
       </div>
       <p style="margin: 0px; color: black; font-weight: 500">Contact Me!</p>
     </div>
-  <p> I'm contactable by email at hey (at) slitrostudio (dot) me</p>
-  <p>NO EMAIL LIST</p>
-  <pre>
-If you are or represent any of the following:
-- Ai Companies
-- Marketers
-- Spammers
-- Door to door salesmen
-- Unsolicited advice givers
-Please do not contact me ever, thank you.
-  </pre>
+    <div class="letter-content">
+    
+      
+      <p class="letter-body">I'm contactable by email at:</p>
+      <p class="letter-email">hey (at) slitrostudio (dot) me</p>
+      
+      <div class="letter-warning">
+        <p style="margin-top: 0;"><strong>Please Note:</strong></p>
+        <p>I prefer not to be contacted by:</p>
+        <ul>
+          <li>AI Companies</li>
+          <li>Marketers</li>
+          <li>Spammers</li>
+          <li>Door to door salesmen</li>
+          <li>Unsolicited advice givers</li>
+        </ul>
+        <p style="margin-bottom: 0;">Please do not contact me if you fall into these categories. Thank you.</p>
+      </div>
+      
+      <div class="letter-signature">
+        <p>Best regards,</p>
+        <p style="margin-top: 24px; font-weight: 600;">Josh</p>
+      </div>
+    </div>
   </div>
 
 <div id="About" class="compact">

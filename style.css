@@ -282,7 +282,39 @@ body {
 }
 
 #contact {
-  background-color: rgba(230, 126, 34, 0.06) !important;
+  background: linear-gradient(135deg, #fef9f3 0%, #f5f1eb 100%) !important;
+  max-width: 600px;
+  width: min(90vw, 600px);
+  box-shadow: 
+    inset 0 1px 0 rgba(255,255,255,0.6),
+    0 10px 30px rgba(0, 0, 0, 0.15),
+    0 0 0 1px rgba(0, 0, 0, 0.08);
+}
+
+#contact::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.03) 2px,
+      rgba(0, 0, 0, 0.03) 4px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.02) 2px,
+      rgba(0, 0, 0, 0.02) 4px
+    );
+  pointer-events: none;
+  border-radius: 16px;
 }
 
 #About {
@@ -364,6 +396,23 @@ body {
   margin-bottom: 0.9rem;
   text-wrap: balance;
   hyphens: auto;
+}
+
+/* Hide stats header from normal flow but keep it as drag handle */
+#statsheader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 48px;
+  z-index: 100;
+  cursor: move;
+}
+
+/* Stats window just contains iPad, no padding */
+#stats {
+  padding: 12px !important;
 }
 
 .balanced-text {
@@ -482,8 +531,12 @@ body {
   margin-top: -0.4rem;
 }
 
-#About p:first-of-type,
-#contact p:first-of-type {
+#contact p:first-of-type,
+#contact p.letter-body,
+#contact p.letter-email,
+#contact .letter-date,
+#contact .letter-greeting,
+#contact .letter-signature {
   margin-top: 0;
   margin-bottom: 1rem;
 }
@@ -525,6 +578,78 @@ body {
 
 /* Small utilities */
 .hidden { display: none !important; }
+
+/* Letter styling for Contact window */
+.letter-content {
+  padding: 48px 40px;
+  font-size: 1rem;
+  line-height: 1.8;
+  color: #1a1a1a;
+}
+
+.letter-date {
+  font-size: 0.95rem;
+  color: #555;
+  margin-bottom: 2rem;
+  text-align: right;
+}
+
+.letter-greeting {
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  color: #1a1a1a;
+}
+
+.letter-body {
+  margin-bottom: 0.5rem !important;
+}
+
+.letter-email {
+  font-weight: 600;
+  color: #0066cc;
+  margin-bottom: 2rem !important;
+  padding: 12px 16px;
+  background: rgba(0, 102, 204, 0.08);
+  border-radius: 6px;
+  border-left: 3px solid #0066cc;
+}
+
+.letter-warning {
+  background: rgba(220, 53, 69, 0.06);
+  padding: 16px;
+  border-radius: 8px;
+  border-left: 3px solid #dc3545;
+  margin: 2rem 0;
+}
+
+.letter-warning p {
+  margin-bottom: 0.8rem !important;
+  max-width: none !important;
+  color: #1a1a1a;
+}
+
+.letter-warning ul {
+  margin: 1rem 0;
+  padding-left: 24px;
+  color: #1a1a1a;
+}
+
+.letter-warning li {
+  margin-bottom: 0.4rem;
+  line-height: 1.6;
+}
+
+.letter-signature {
+  margin-top: 2.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.letter-signature p {
+  margin-bottom: 0 !important;
+  max-width: none !important;
+  color: #1a1a1a;
+}
 
 /* Notes app specific layout (two-column list + content) */
 #notes .notes-wrap {
@@ -595,72 +720,136 @@ body {
   overflow-y: auto; /* scroll if content is long */
 }
 
-/* iPad mock + stats animation inside stats window */
+/* Retro iPad frame (iPad 1/2 style) for stats */
 .ipad-mock {
   position: relative;
-  width: 320px;
-  margin: 12px auto 0 auto;
-  transform-origin: left center;
-  transform: translateX(-120%) rotate(-8deg) scale(0.98);
-  opacity: 0;
-  pointer-events: none;
+  width: 360px;
+  height: 520px;
+  margin: 20px auto 0 auto;
 }
-.ipad-mock.play {
-  animation: ipadPushIn 700ms cubic-bezier(.2,.9,.3,1) forwards;
-  pointer-events: auto;
-}
-.ipad-frame { width: 100%; display: block; border-radius: 12px; }
-.ipad-screen {
-  position: absolute;
-  left: 6.5%;
-  top: 12.5%;
-  width: 87%;
-  height: 65%;
-  overflow: hidden;
-  border-radius: 8px;
-  background: rgba(255,255,255,0.06);
+
+.ipad-bezel {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 50%, #ddd 100%);
+  border-radius: 20px;
+  padding: 40px 48px 70px 48px;
+  box-sizing: border-box;
+  box-shadow: 
+    0 12px 40px rgba(0,0,0,0.2), 
+    inset 0 1px 0 rgba(255,255,255,0.5),
+    inset 0 -2px 4px rgba(0,0,0,0.1);
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  padding: 12px;
+  border: 4px solid #ccc;
+}
+
+.ipad-notch {
+  display: none;
+}
+
+.ipad-screen {
+  flex: 1;
+  background: linear-gradient(135deg, #f0ede4 0%, #e5e2d9 100%);
+  border-radius: 0px;
+  padding: 16px 12px;
   box-sizing: border-box;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: 
+    inset 0 1px 3px rgba(255,255,255,0.3),
+    inset 0 -1px 3px rgba(0,0,0,0.15),
+    0 8px 20px rgba(0,0,0,0.2);
+  border: 2px solid #888;
 }
+
 .stat-card {
-  background: rgba(0,0,0,0.03);
-  padding: 8px 10px;
-  border-radius: 8px;
-}
-.stat-label { font-size: 0.85rem; color: rgba(0,0,0,0.6); }
-.stat-value { font-weight: 700; font-size: 1rem; color: #000; }
-
-@keyframes ipadPushIn {
-  0% { transform: translateX(-120%) rotate(-12deg) scale(.95); opacity: 0; }
-  75% { transform: translateX(6%) rotate(-3deg) scale(1.02); opacity: 1; }
- 100% { transform: translateX(0%) rotate(0deg) scale(1); opacity: 1; }
+  background: rgba(255,255,255,0.85);
+  padding: 10px 12px;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  border: 1px solid rgba(0,0,0,0.08);
 }
 
-/* small circular home button positioned over frame bottom center */
+.stat-label { 
+  font-size: 0.75rem; 
+  color: rgba(0,0,0,0.6); 
+  margin-bottom: 3px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stat-value { 
+  font-weight: 700; 
+  font-size: 1rem; 
+  color: #1a1a1a; 
+}
+
+/* reveal stats on open */
+.stats-anim { 
+  opacity: 0; 
+  transform: translateY(8px); 
+  transition: opacity 360ms ease 200ms, transform 360ms ease 200ms; 
+}
+
+#stats.compact .stats-anim { 
+  opacity: 1; 
+  transform: translateY(0); 
+}
+
+/* large physical home button at bottom */
+.ipad-camera {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #333 0%, #111 100%);
+  border: 1px solid #222;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.5), 0 1px 2px rgba(0,0,0,0.2);
+  z-index: 15;
+}
+
 .ipad-home {
   position: absolute;
   left: 50%;
-  bottom: 6%;
+  bottom: 18px;
   transform: translateX(-50%);
-  width: 28px;
-  height: 28px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
-  border: 1px solid rgba(0,0,0,0.12);
-  background: rgba(255,255,255,0.9);
-  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+  border: 3px solid #999;
+  background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 50%, #ddd 100%);
   cursor: pointer;
+  z-index: 20;
+  transition: transform 120ms ease, box-shadow 120ms ease;
+  box-shadow: 
+    inset 0 2px 4px rgba(255,255,255,0.4),
+    inset 0 -2px 4px rgba(0,0,0,0.15),
+    0 4px 12px rgba(0,0,0,0.2);
 }
 
-/* reveal inner stats after push animation */
-.stats-anim { opacity: 0; transform: translateY(8px); transition: opacity 360ms ease 320ms, transform 360ms ease 320ms; }
-.ipad-mock.play .stats-anim { opacity: 1; transform: translateY(0); }
+.ipad-home:hover {
+  transform: translateX(-50%) scale(1.05);
+}
+
+.ipad-home:active {
+  transform: translateX(-50%) scale(0.98);
+  box-shadow: 
+    inset 0 2px 4px rgba(0,0,0,0.2),
+    inset 0 -1px 2px rgba(255,255,255,0.1),
+    0 2px 6px rgba(0,0,0,0.2);
+}
 
 @media (prefers-reduced-motion: reduce) {
-  .ipad-mock { animation: none !important; transform: none !important; opacity: 1 !important; }
   .stats-anim { transition: none; opacity: 1; transform: none; }
+  .ipad-home { transition: none; }
 }
 
 #stats h1 {
