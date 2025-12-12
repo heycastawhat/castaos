@@ -211,6 +211,18 @@ function openWindow(element) {
   biggestIndex++;  // Increment biggestIndex by 1
   element.style.zIndex = biggestIndex;
   topBar.style.zIndex = biggestIndex + 1;
+  // If stats window opened, play the ipad push animation
+  if (element.id === 'stats') {
+    // ensure mock exists
+    setTimeout(function() {
+      var mock = element.querySelector('.ipad-mock');
+      if (!mock) return;
+      mock.classList.remove('play');
+      // force reflow so animation can re-run
+      void mock.offsetWidth;
+      mock.classList.add('play');
+    }, 50);
+  }
 }
 
 function handleWindowTap(element) {

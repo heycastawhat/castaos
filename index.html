@@ -82,27 +82,86 @@
       <p style="margin: 0px; color: black; font-weight: 500">Music</p>
     </div>
     <h1>Music I'm into right now</h1>
-    <div class="music-list">
-      <div class="music-item">
-        <h3>Level of Concern - twenty one pilots</h3>
-        <audio controls style="width: 100%;">
-          <source src="Level of Concern.mp3" type="audio/mpeg">
-          Your browser does not support the audio element.
-        </audio>
+    <div class="playlist">
+      <div class="track">
+        <div class="art">🎵</div>
+        <div class="meta">
+          <h4>Level of Concern</h4>
+          <div class="sub">twenty one pilots · 3:42</div>
+        </div>
+        <div class="controls">
+          <audio controls>
+            <source src="Level of Concern.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+          </audio>
+        </div>
       </div>
-      <div class="music-item">
-        <h3>Drum Show - twenty one pilots</h3>
-        <audio controls style="width: 100%;">
-          <source src="Drum Show.mp3" type="audio/mpeg">
-          Your browser does not support the audio element.
-        </audio>
+
+      <div class="track">
+        <div class="art">🥁</div>
+        <div class="meta">
+          <h4>Drum Show</h4>
+          <div class="sub">twenty one pilots · 3:23</div>
+        </div>
+        <div class="controls">
+          <audio controls>
+            <source src="Drum Show.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+          </audio>
+        </div>
       </div>
-      <div class="music-item">
-        <h3>Lavish - twenty one pilots</h3>
-        <audio controls style="width: 100%;">
-          <source src="Lavish.mp3" type="audio/mpeg">
-          Your browser does not support the audio element.
-        </audio>
+
+      <div class="track">
+        <div class="art">✨</div>
+        <div class="meta">
+          <h4>Lavish</h4>
+          <div class="sub">twenty one pilots · 2:38</div>
+        </div>
+        <div class="controls">
+          <audio controls>
+            <source src="Lavish.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+          </audio>
+        </div>
+      </div>
+     <div class="track">
+        <div class="art">💥</div>
+        <div class="meta">
+          <h4>The Hype</h4>
+          <div class="sub">twenty one pilots · 4:25</div>
+        </div>
+        <div class="controls">
+          <audio controls>
+            <source src="The Hype.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+          </audio>
+        </div>
+      </div>
+      <div class="track">
+        <div class="art">🏙️</div>
+        <div class="meta">
+          <h4>Leave the city</h4>
+          <div class="sub">twenty one pilots · 4:40</div>
+        </div>
+        <div class="controls">
+          <audio controls>
+            <source src="Leave the City.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+          </audio>
+        </div>
+      </div>
+      <div class="track">
+        <div class="art">🗺️</div>
+        <div class="meta">
+          <h4>Drag Path</h4>
+          <div class="sub">twenty one pilots · 4</div>
+        </div>
+        <div class="controls">
+          <audio controls>
+            <source src="Drag Path.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+          </audio>
+        </div>
       </div>
     </div>
   </div>
@@ -237,12 +296,10 @@ Please do not contact me ever, thank you.
           Feel free to poke around!<br>
           <br>
         </p>
-        <p id="clickMe" onclick="showRandomQuote()" style="color: blue;">
-    Click me
-  </p>
+        <button id="clickMe" class="inline-button" onclick="showRandomQuote()">Click me</button>
   <p>88x31 Buttons are cool.</p>
-  <p id="copyButton" role="button" tabindex="0" style="cursor: pointer; text-decoration: underline; color: #0b66ff;">Copy mine by pressing this!</p>
-  <p><a id="openBadges" role="button" tabindex="0" style="cursor:pointer; color: #0b66ff; text-decoration: underline;">View 88×31 Buttons (opens a window)</a></p>
+  <p><button id="copyButton" class="inline-button" role="button" tabindex="0">Copy mine by pressing this!</button></p>
+  <p><a id="openBadges" class="inline-button" role="button" tabindex="0" style="display: inline-block;">View 88×31 Buttons (opens a window)</a></p>
 </div>
     </div>
   </div>

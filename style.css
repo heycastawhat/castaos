@@ -190,6 +190,51 @@ body {
   overflow-y: auto;
 }
 
+/* Playlist / track card styles for Music window */
+.playlist {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+.track {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 10px 12px;
+  background: rgba(0,0,0,0.03);
+  border-radius: 10px;
+  border: 1px solid rgba(0,0,0,0.04);
+  width: 100%;
+}
+.track .art {
+  width: 56px;
+  height: 56px;
+  border-radius: 6px;
+  background: linear-gradient(135deg, rgba(74,144,226,0.12), rgba(52,152,219,0.08));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+}
+.track .meta {
+  flex: 1 1 auto;
+}
+.track .meta h4 {
+  margin: 0 0 4px 0;
+  font-size: 0.98rem;
+}
+.track .meta .sub {
+  font-size: 0.86rem;
+  color: rgba(0,0,0,0.55);
+}
+.track .controls {
+  width: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
 /* Accent colors for individual windows (title bar backgrounds) */
 #notesheader {
   background-color: rgba(74, 144, 226, 0.5) !important;
@@ -252,11 +297,11 @@ body {
   background-color: rgba(52, 152, 219, 0.06) !important;
 }
 
-/* Music window specific sizing and content layout */
+/* Music window specific sizing and content layout (portrait-style) */
 #music {
-  width: min(88vw, 700px) !important;
-  max-width: 88vw;
-  padding: 40px 16px 16px 16px !important;
+  width: min(56vw, 460px) !important;
+  max-width: 90vw;
+  padding: 56px 18px 18px 18px !important;
 }
 
 #music h1 {
@@ -284,16 +329,46 @@ body {
   display: block;
   width: 100%;
   margin: 0 0 0.2rem 0;
-  font-size: 0.85rem;
-  font-weight: 400;
+  font-size: 0.95rem;
+  font-weight: 500;
   color: #000;
 }
 
 #music audio {
   width: 100%;
-  height: 28px;
+  height: 32px;
   box-sizing: border-box;
   display: block;
+}
+
+/* Inline clickable text -> button style used across welcome and others */
+.inline-button {
+  display: inline-block;
+  background: #0b66ff;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: none;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(11,102,255,0.12);
+  font-weight: 600;
+}
+.inline-button:hover {
+  background: #0956d1;
+  transform: translateY(-2px);
+}
+
+/* About window spacing and balanced line breaks */
+#About p {
+  margin-bottom: 0.9rem;
+  text-wrap: balance;
+  hyphens: auto;
+}
+
+.balanced-text {
+  text-wrap: balance;
+  hyphens: auto;
 }
 
 /* Ensure text in colored headers is readable */
@@ -520,6 +595,74 @@ body {
   overflow-y: auto; /* scroll if content is long */
 }
 
+/* iPad mock + stats animation inside stats window */
+.ipad-mock {
+  position: relative;
+  width: 320px;
+  margin: 12px auto 0 auto;
+  transform-origin: left center;
+  transform: translateX(-120%) rotate(-8deg) scale(0.98);
+  opacity: 0;
+  pointer-events: none;
+}
+.ipad-mock.play {
+  animation: ipadPushIn 700ms cubic-bezier(.2,.9,.3,1) forwards;
+  pointer-events: auto;
+}
+.ipad-frame { width: 100%; display: block; border-radius: 12px; }
+.ipad-screen {
+  position: absolute;
+  left: 6.5%;
+  top: 12.5%;
+  width: 87%;
+  height: 65%;
+  overflow: hidden;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  box-sizing: border-box;
+}
+.stat-card {
+  background: rgba(0,0,0,0.03);
+  padding: 8px 10px;
+  border-radius: 8px;
+}
+.stat-label { font-size: 0.85rem; color: rgba(0,0,0,0.6); }
+.stat-value { font-weight: 700; font-size: 1rem; color: #000; }
+
+@keyframes ipadPushIn {
+  0% { transform: translateX(-120%) rotate(-12deg) scale(.95); opacity: 0; }
+  75% { transform: translateX(6%) rotate(-3deg) scale(1.02); opacity: 1; }
+ 100% { transform: translateX(0%) rotate(0deg) scale(1); opacity: 1; }
+}
+
+/* small circular home button positioned over frame bottom center */
+.ipad-home {
+  position: absolute;
+  left: 50%;
+  bottom: 6%;
+  transform: translateX(-50%);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid rgba(0,0,0,0.12);
+  background: rgba(255,255,255,0.9);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+  cursor: pointer;
+}
+
+/* reveal inner stats after push animation */
+.stats-anim { opacity: 0; transform: translateY(8px); transition: opacity 360ms ease 320ms, transform 360ms ease 320ms; }
+.ipad-mock.play .stats-anim { opacity: 1; transform: translateY(0); }
+
+@media (prefers-reduced-motion: reduce) {
+  .ipad-mock { animation: none !important; transform: none !important; opacity: 1 !important; }
+  .stats-anim { transition: none; opacity: 1; transform: none; }
+}
+
 #stats h1 {
   margin-top: 0;
   margin-bottom: 1.2rem;
@@ -630,7 +773,7 @@ body {
 /* Make the welcome window a bit smaller and responsive */
 #welcome {
   width: min(76vw, 640px);
-  padding: 32px 18px 18px 18px; /* slightly tighter padding */
+  padding: 64px 18px 18px 18px; /* ensure enough top padding for the absolute header */
   max-height: 80vh; /* keep it from filling the entire viewport */
   overflow-y: auto; /* allow scrolling if content is long */
 }
